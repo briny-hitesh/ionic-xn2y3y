@@ -1,0 +1,43 @@
+svg {
+  display: block;
+  margin: 0 auto;
+}
+g {
+  cursor: pointer;
+}
+.content-md {
+  background: #c00db8;
+}
+.path {
+  fill: none;
+  stroke: rgba($color: #ffffff, $alpha: 0.5);
+  stroke-width: 4px;
+  stroke-linecap: round;
+}
+.circle {
+  fill: #1d4fcf;
+  stroke: #fff;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  box-shadow: 0 0 60px rgba($color: #000000, $alpha: 0.2)
+}
+.green {
+  fill: #81e764;
+}
+.blue {
+  fill: #2b37af
+}
+.count {
+  font-size: 43px;
+  font-weight: bold;
+}
+
+.progress {
+  font-size: 7px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.small {
+  font-size: 13px;
+  font-weight: bold;
+}
