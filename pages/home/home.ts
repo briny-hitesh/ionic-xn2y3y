@@ -24,7 +24,7 @@ export class HomePage {
     md: 50
   }
   data = data;
-  svgJson: Array<{size: number, color: string, enableClick: boolean, text: number, x: number, y: number}> = [];
+  svgJson: Array<{size: number, color: string, enableClick: boolean, text: number, x: number, y: number, topText: string, bottomText: string}> = [];
   constructor(public navCtrl: NavController) {
 
   }
@@ -38,6 +38,8 @@ export class HomePage {
       text: this.data['upcoming'].Group,
       x: this.circleCodes.center,
       y: this.circleCodes.start,
+      topText: '',
+      bottomText: ''
     });
     this.svgJson.push({
       size: this.size.lg,
@@ -46,7 +48,35 @@ export class HomePage {
       text: this.data['current'].Group,
       x: this.circleCodes.right,
       y: this.circleCodes.start,
+      topText: 'Keep Going...',
+      bottomText: '20% Completed'
     });
+    const keys = Object.keys(this.data['previous'])
+    let d = 0;
+    keys.forEach((key, i) => {
+      console.log(i)
+      let x: number;
+      if(d === 0 || d === 2) {
+        x = this.circleCodes.center
+      } else if(d === 1) {
+        x = this.circleCodes.left
+      } else if(d === 3) {
+        x = this.circleCodes.right
+        d = -1;
+      }
+      d++;
+      console.log();
+      this.svgJson.push({
+        size: this.size.sm,
+        color: 'blue',
+        enableClick: false,
+        text: this.data['previous'][keys[keys.length - (i+1)]].Group,
+        x: x,
+        y: this.circleCodes.start,
+        topText: '',
+        bottomText: ''
+      });
+    })
   }
 
 }

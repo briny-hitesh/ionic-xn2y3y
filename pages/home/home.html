@@ -14,8 +14,10 @@
 		<path class="path" d="M 300 50 C 700 250 -100 250 300 450 C700 650 -100 650 300 850" />
     <ng-container *ngFor="let item of svgJson; let i = index">
       <g>
-        <circle [attr.cx]="item.x" [attr.cy]="item.y + (100 * i)" [attr.r]="item.size" [attr.class]="'circle ' + item.color"></circle>  
+        <circle [attr.cx]="item.x" [attr.cy]="item.y + (100 * i)" [attr.r]="item.size" [attr.class]="'circle ' + item.color"></circle>
+        <text *ngIf="item.size === size.lg" dy="-2.5em" [attr.x]="item.x" [attr.y]="item.y + (100 * i)" fill="white" dominant-baseline="middle" text-anchor="middle" class="small">{{item.topText}}</text>
         <text [attr.x]="item.x" [attr.y]="item.y + (100 * i)" dominant-baseline="middle" text-anchor="middle" fill="white" class="count" [ngClass]="{'lg': item.size === size.lg, 'md': item.size === size.md}">{{item.text}}</text>
+        <text dy="2.5em" *ngIf="item.size === size.lg" [attr.x]="item.x" [attr.y]="item.y + (100 * i)" fill="white" dominant-baseline="middle" text-anchor="middle" class="small">{{item.bottomText}}</text>
       </g>
     </ng-container>
 		<!--g>
