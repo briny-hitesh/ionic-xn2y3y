@@ -1,6 +1,8 @@
 svg {
   display: block;
   margin: 0 auto;
+  max-width: 620px;
+  width: 100%
 }
 g {
   cursor: pointer;
@@ -10,26 +12,32 @@ g {
 }
 .path {
   fill: none;
-  stroke: rgba($color: #ffffff, $alpha: 0.5);
+  stroke: rgba($color: #ffffff, $alpha: 0.3);
   stroke-width: 4px;
   stroke-linecap: round;
 }
 .circle {
-  fill: #1d4fcf;
+  fill: #0057b8;
   stroke: #fff;
   stroke-width: 3px;
   stroke-linecap: round;
   box-shadow: 0 0 60px rgba($color: #000000, $alpha: 0.2)
 }
 .green {
-  fill: #81e764;
+  fill: #3da930;
 }
 .blue {
-  fill: #2b37af
+  fill: #004491
 }
 .count {
-  font-size: 43px;
-  font-weight: bold;
+  font-family: LuckiestGuy;
+  &.lg {
+    font-size: 43px;
+  }
+  &.md {
+    font-size: 33px
+  }
+  font-size: 25px;
 }
 
 .progress {
@@ -38,6 +46,7 @@ g {
   text-transform: uppercase;
 }
 .small {
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 12px;
+  font-family: LuckiestGuy;
+  text-transform: uppercase;
 }
