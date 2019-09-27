@@ -30,7 +30,46 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    console.log(data);
+    let d = 0;
+    const currentGroup = Number(this.data['upcoming'].Group);
+    let index: number;
+    if(currentGroup < 26) {
+      index = 25 - currentGroup;
+    } else if(currentGroup < 50) {
+      index = 50 - currentGroup;
+    } else if(currentGroup < 75) {
+      index = 75 - currentGroup;
+    } else if(currentGroup < 100) {
+      index = 100 - currentGroup;
+    } else if(currentGroup < 125) {
+      index = 125 - currentGroup;
+    } else if(currentGroup < 150) {
+      index = 150 - currentGroup;
+    } else if(currentGroup < 175) {
+      index = 175 - currentGroup;
+    };
+    for(let i = 0; i < 25; i++) {
+      let x: number;
+      if(d === 0 || d === 2) {
+        x = this.circleCodes.center
+      } else if(d === 1) {
+        x = this.circleCodes.right
+      } else if(d === 3) {
+        x = this.circleCodes.left
+        d = -1;
+      }
+      d++;
+      this.svgJson.push({
+        size: this.size.md,
+        color: '',
+        enableClick: false,
+        text: this.data['upcoming'].Group + i,
+        x: x,
+        y: this.circleCodes.start,
+        topText: '',
+        bottomText: ''
+      });
+    }
     this.svgJson.push({
       size: this.size.md,
       color: '',
@@ -41,27 +80,38 @@ export class HomePage {
       topText: '',
       bottomText: ''
     });
+    let x: number;
+    if(d === 0 || d === 2) {
+      x = this.circleCodes.center
+    } else if(d === 1) {
+      x = this.circleCodes.right
+    } else if(d === 3) {
+      x = this.circleCodes.left
+      d = -1;
+    }
+    d++;
+    const completedTask = (this.data['current'].TotalNoOfTaskCompleted / this.data['current'].Threshold) * 100;
     this.svgJson.push({
       size: this.size.lg,
       color: 'green',
-      enableClick: false,
+      enableClick: true,
       text: this.data['current'].Group,
-      x: this.circleCodes.right,
+      x: x,
       y: this.circleCodes.start,
       topText: 'Keep Going...',
-      bottomText: '20% Completed'
+      bottomText: completedTask +'% Completed'
     });
     const keys = Object.keys(this.data['previous'])
-    let d = 0;
+    
     keys.forEach((key, i) => {
       console.log(i)
       let x: number;
       if(d === 0 || d === 2) {
         x = this.circleCodes.center
       } else if(d === 1) {
-        x = this.circleCodes.left
-      } else if(d === 3) {
         x = this.circleCodes.right
+      } else if(d === 3) {
+        x = this.circleCodes.left
         d = -1;
       }
       d++;
@@ -77,6 +127,9 @@ export class HomePage {
         bottomText: ''
       });
     })
+  }
+  openTaskView() {
+    console.log('hi')
   }
 
 }
