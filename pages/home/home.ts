@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { data } from './apirespons';
 @Component({
@@ -6,7 +6,7 @@ import { data } from './apirespons';
   templateUrl: 'home.html',
   styleUrls: ['home.scss']
 })
-export class HomePage {
+export class HomePage implements AfterViewInit {
   circleCodes: {
     left: number;
     right: number;
@@ -24,38 +24,34 @@ export class HomePage {
     md: 50
   }
   data = data;
+  level = 3;
   svgJson: Array<{size: number, color: string, enableClick: boolean, text: number, x: number, y: number, topText: string, bottomText: string}> = [];
+  themeBackground: string[] = [
+    '#0e314d', '#0e314d', '#091746', '#581461', '#bc4549', '#bd8636', '#5e852a', '#46988c'
+  ];
   constructor(public navCtrl: NavController) {
 
   }
 
   ionViewDidLoad() {
     let d = 0;
-    const currentGroup = Number(this.data['upcoming'].Group);
+    const current = 'current';
+    const previous = 'previous';
+    const currentGroup = Number(this.data[current].Group);
     let index: number;
-    if(currentGroup < 26) {
-      index = 25 - currentGroup;
-    } else if(currentGroup < 50) {
-      index = 50 - currentGroup;
-    } else if(currentGroup < 75) {
-      index = 75 - currentGroup;
-    } else if(currentGroup < 100) {
-      index = 100 - currentGroup;
-    } else if(currentGroup < 125) {
-      index = 125 - currentGroup;
-    } else if(currentGroup < 150) {
-      index = 150 - currentGroup;
-    } else if(currentGroup < 175) {
-      index = 175 - currentGroup;
-    };
-    for(let i = 0; i < 25; i++) {
-      let x: number;
-      if(d === 0 || d === 2) {
-        x = this.circleCodes.center
-      } else if(d === 1) {
-        x = this.circleCodes.right
-      } else if(d === 3) {
-        x = this.circleCodes.left
+    const totalBlock = 25 * this.level;
+    if (currentGroup < totalBlock) {
+      index = totalBlock - currentGroup;
+    }
+    let x: number;
+    for (let i = 0; i < index; i++) {
+
+      if (d === 0 || d === 2) {
+        x = this.circleCodes.center;
+      } else if (d === 1) {
+        x = this.circleCodes.right;
+      } else if (d === 3) {
+        x = this.circleCodes.left;
         d = -1;
       }
       d++;
@@ -63,70 +59,77 @@ export class HomePage {
         size: this.size.md,
         color: '',
         enableClick: false,
-        text: this.data['upcoming'].Group + i,
-        x: x,
+        text: this.data[current].Group + (index - i),
+        x,
         y: this.circleCodes.start,
         topText: '',
         bottomText: ''
       });
     }
-    this.svgJson.push({
-      size: this.size.md,
-      color: '',
-      enableClick: false,
-      text: this.data['upcoming'].Group,
-      x: this.circleCodes.center,
-      y: this.circleCodes.start,
-      topText: '',
-      bottomText: ''
-    });
-    let x: number;
-    if(d === 0 || d === 2) {
-      x = this.circleCodes.center
-    } else if(d === 1) {
-      x = this.circleCodes.right
-    } else if(d === 3) {
-      x = this.circleCodes.left
+    if (d === 0 || d === 2) {
+      x = this.circleCodes.center;
+    } else if (d === 1) {
+      x = this.circleCodes.right;
+    } else if (d === 3) {
+      x = this.circleCodes.left;
       d = -1;
     }
     d++;
-    const completedTask = (this.data['current'].TotalNoOfTaskCompleted / this.data['current'].Threshold) * 100;
+    const completedTask = (this.data[current].TotalNoOfTaskCompleted / this.data[current].Threshold) * 100;
     this.svgJson.push({
       size: this.size.lg,
       color: 'green',
       enableClick: true,
-      text: this.data['current'].Group,
-      x: x,
+      text: this.data[current].Group,
+      x,
       y: this.circleCodes.start,
       topText: 'Keep Going...',
-      bottomText: completedTask +'% Completed'
+      bottomText: completedTask + '% Completed'
     });
-    const keys = Object.keys(this.data['previous'])
-    
+    const keys = Object.keys(this.data[previous]);
+
     keys.forEach((key, i) => {
-      console.log(i)
-      let x: number;
-      if(d === 0 || d === 2) {
-        x = this.circleCodes.center
-      } else if(d === 1) {
-        x = this.circleCodes.right
-      } else if(d === 3) {
-        x = this.circleCodes.left
+      if (d === 0 || d === 2) {
+        x = this.circleCodes.center;
+      } else if (d === 1) {
+        x = this.circleCodes.right;
+      } else if (d === 3) {
+        x = this.circleCodes.left;
         d = -1;
       }
       d++;
-      console.log();
       this.svgJson.push({
         size: this.size.sm,
         color: 'blue',
         enableClick: false,
-        text: this.data['previous'][keys[keys.length - (i+1)]].Group,
-        x: x,
+        text: this.data[previous][keys[keys.length - (i + 1)]].Group,
+        x,
         y: this.circleCodes.start,
         topText: '',
         bottomText: ''
       });
-    })
+    });
+  }
+
+  ngAfterViewInit() {
+    console.log('af')
+    const eleRef: any = document.getElementById('current');
+    const currentGroup: any = document.getElementById('currentGroup');
+    if (eleRef) {
+      const scroll = Number(eleRef.getAttribute('cy'));
+      if (scroll) {
+       // this.content.scrollByPoint(0, (scroll - 150), 1000);
+      }
+      currentGroup.onmouseover = ((event: MouseEvent) => {
+        console.log('4545')
+        currentGroup.setAttribute('style', 'transform: scale(1.2) translate(-51px, -345px)');
+        eleRef.setAttribute('filter', 'url(#shadow)');
+      });
+      currentGroup.onmouseleave = ((event: MouseEvent) => {
+        currentGroup.setAttribute('style', 'transform: scale(1) translate(0, 0)');
+        eleRef.setAttribute('filter', '');
+      });
+    }
   }
   openTaskView() {
     console.log('hi')
