@@ -22,7 +22,7 @@
             </ng-container>
             <ng-container *ngIf="!item.enableClick">
               <g>
-                <image xlink:href="assets/icons/done.svg" [attr.x]="item.x + 20" [attr.y]="(item.y + ( 100 * i)) - 40" height="36" width="36"></image>
+                <image *ngIf="item.color === 'blue'" xlink:href="assets/icons/done.svg" [attr.x]="item.x + 20" [attr.y]="(item.y + ( 100 * i)) - 40" height="36" width="36"></image>
                 <circle [attr.cx]="item.x" [attr.cy]="item.y + (100 * i)" [attr.r]="item.size" [attr.class]="'circle ' + item.color"></circle>
                 <text *ngIf="item.size === size.lg" dy="-2.5em" [attr.x]="item.x" [attr.y]="item.y + (100 * i)" fill="white" dominant-baseline="middle" text-anchor="middle" class="small">{{item.topText}}</text>
                 <text [attr.x]="item.x" [attr.y]="item.y + (100 * i)" dominant-baseline="middle" text-anchor="middle" fill="white" class="count" [ngClass]="{'lg': item.size === size.lg, 'md': item.size === size.md}">{{item.text}}</text>
