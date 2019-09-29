@@ -1,8 +1,30 @@
+ion-content {
+  --background: #009FDB;
+  font-family: 'LuckiestGuy';
+}
+
+.custom-popover {
+  width: 250px;
+  height: 138px;
+  border-radius: 30px;
+  top:50%!important;
+  bottom: 0px!important;
+  left: 105px!important;
+}
+.background {
+  background: url('/assets/images/pattern.svg') 50% 50% repeat-y;
+}
+#currentGroup {
+  transition: all 0.3s ease;
+}
+canvas {
+  width: 100%;
+}
 svg {
   display: block;
-  margin: 0 auto;
+  margin: 60px auto 0;
   max-width: 620px;
-  width: 100%
+  width: 100%;
 }
 g {
   cursor: pointer;
