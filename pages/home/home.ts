@@ -19,7 +19,7 @@ import { ScoreBoardService } from '../services/score-board/score-board.service';
 })
 export class TaskBoardPage implements OnInit, AfterViewInit {
   scoreHeadsUpInfo: any;
-  svgHeight: number;
+  svgHeight: number = Number(2600);
   circleCodes: {
     left: number;
     right: number;
@@ -29,7 +29,7 @@ export class TaskBoardPage implements OnInit, AfterViewInit {
       left: 190,
       right: 400,
       center: 300,
-      start: 50
+      start: 100
   };
   xCodes: number[] = [
     300, 400, 300, 190
@@ -45,11 +45,12 @@ export class TaskBoardPage implements OnInit, AfterViewInit {
     }> = [];
 
   themeBackground: string[] = [
-    '#0e314d', '#0e314d', '#091746', '#581461', '#bc4549', '#bd8636', '#5e852a', '#46988c'
+    '#009fdb', '#009fdb', '#0057b8', '#af29bb', '#ff585d', '#ffb000', '#91dc00', '#49eedc'
   ];
 
-  @ViewChild('content', {static: true}) content: IonContent;
-  @ViewChild('currentGroup', {static: true}) currentGroup: ElementRef;
+  @ViewChild('content') content: IonContent;
+  @ViewChild('currentGroup') currentGroup: ElementRef;
+
   constructor(
     private router: Router,
     private userJourneyService: UserJourneyApiService,
@@ -71,7 +72,7 @@ export class TaskBoardPage implements OnInit, AfterViewInit {
     // this.setupScroll();
   }
 
-  ngAfterViewInit() {
+  setUpHover() {
     const eleRef: any = document.getElementById('current');
     const currentGroup: any = document.getElementById('currentGroup');
     if (eleRef) {
@@ -102,6 +103,9 @@ export class TaskBoardPage implements OnInit, AfterViewInit {
     this.userJourneyService.getuserJourneyTask().subscribe(res => {
       this.userJourney = res;
       this.setupSVGData();
+      setTimeout(() => {
+        this.setUpHover();
+      }, 500);
     });
   }
 
@@ -120,6 +124,8 @@ export class TaskBoardPage implements OnInit, AfterViewInit {
       this.level = 6;
     } else if (currentGroup <= 175) {
       this.level = 7;
+    } else {
+      this.level = 8;
     }
   }
 
@@ -166,7 +172,7 @@ export class TaskBoardPage implements OnInit, AfterViewInit {
     const keys = Object.keys(this.userJourney[previous]);
     console.log(firstBlock);
     keys.forEach((key, i) => {
-      if (firstBlock >  this.userJourney[previous][keys[keys.length - (i + 1)]].Group) {
+      if ((firstBlock + 1) >  this.userJourney[previous][keys[keys.length - (i + 1)]].Group) {
         return;
       }
       this.svgJson.push({
@@ -190,6 +196,8 @@ export class TaskBoardPage implements OnInit, AfterViewInit {
     this.router.navigate(['home/view']);
   }
   setupScroll($event) {
-    console.log($event);
+    if (document.getElementById('background')) {
+      document.getElementById('background').style.backgroundPositionY = ($event.detail.scrollTop / 2) + 'px';
+    }
   }
 }

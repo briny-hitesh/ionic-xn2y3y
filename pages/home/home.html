@@ -1,16 +1,17 @@
-<ion-content #content (ionScroll)="setupScroll($event)">
-  <div class="ion-canvas"  [ngStyle]="{'background-color': themeBackground[level]}">
-    <div class="background">
-      <!-- <app-score-heads-up [templateData]= scoreHeadsUpInfo *ngIf="scoreHeadsUpInfo"></app-score-heads-up> -->
+<ion-content #content (ionScroll)="setupScroll($event)" scrollEvents="true">
+  <div [ngStyle]="{'background-color': themeBackground[level]}">
+    <div class="background" id="background">
+      <app-score-heads-up [templateData]= scoreHeadsUpInfo *ngIf="scoreHeadsUpInfo"></app-score-heads-up>
+      <div class="ion-canvas">
       <svg [attr.viewBox]="'0 0 600 ' + svgHeight">
         <defs>
           <filter id="shadow">
             <feDropShadow dx="0" dy="0" stdDeviation="5"/>
           </filter>
         </defs>
-        <path class="path" d="M 300 50 C 700 250 -100 250 300 450 C700 650 -100 650
-          300 850C700 1050 -100 1050 300 1250C700 1450 -100 1450 300 1650C700 1850 -100
-          1850 300 2050C700 2250 -100 2250 300 2450" />
+        <path class="path" d="M 300 -400 C 700 -100 -100 -100 300 100 C 700 300 -100 300 300 500 C700 700 -100 700
+          300 900C700 1100 -100 1100 300 1300C700 1500 -100 1500 300 1700C700 1900 -100
+          1900 300 2100C700 2300 -100 2300 300 2500" />
           <ng-container *ngFor="let item of svgJson; let i = index">
             <ng-container *ngIf="item.enableClick">
               <g (click)="openTaskView()" id="currentGroup">
@@ -22,15 +23,16 @@
             </ng-container>
             <ng-container *ngIf="!item.enableClick">
               <g>
-                <image *ngIf="item.color === 'blue'" xlink:href="assets/icons/done.svg" [attr.x]="item.x + 20" [attr.y]="(item.y + ( 100 * i)) - 40" height="36" width="36"></image>
                 <circle [attr.cx]="item.x" [attr.cy]="item.y + (100 * i)" [attr.r]="item.size" [attr.class]="'circle ' + item.color"></circle>
                 <text *ngIf="item.size === size.lg" dy="-2.5em" [attr.x]="item.x" [attr.y]="item.y + (100 * i)" fill="white" dominant-baseline="middle" text-anchor="middle" class="small">{{item.topText}}</text>
                 <text [attr.x]="item.x" [attr.y]="item.y + (100 * i)" dominant-baseline="middle" text-anchor="middle" fill="white" class="count" [ngClass]="{'lg': item.size === size.lg, 'md': item.size === size.md}">{{item.text}}</text>
                 <text dy="2.5em" *ngIf="item.size === size.lg" [attr.x]="item.x" [attr.y]="item.y + (100 * i)" fill="white" dominant-baseline="middle" text-anchor="middle" class="small">{{item.bottomText}}</text>
+                <image *ngIf="item.color === 'blue'" xlink:href="assets/icons/done.svg" [attr.x]="item.x + 20" [attr.y]="(item.y + ( 100 * i)) - 40" height="36" width="36"></image>
               </g>
             </ng-container>
           </ng-container>
       </svg>
+      </div>
     </div>
   </div>
 </ion-content>
