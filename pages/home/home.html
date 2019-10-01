@@ -9,12 +9,16 @@
             <feDropShadow dx="0" dy="0" stdDeviation="5"/>
           </filter>
         </defs>
+        <!-- <path class="path" d="M 300 -450 C 700 -150 -100 -150 300 50 C 700 250 -100 250 300 450 C700 650 -100 650
+          300 850C700 1050 -100 1050 300 1250C700 1450 -100 1450 300 1650C700 1850 -100
+          1850 300 2050C700 2250 -100 2250 300 2450" /> -->
         <path class="path" d="M 300 -400 C 700 -100 -100 -100 300 100 C 700 300 -100 300 300 500 C700 700 -100 700
           300 900C700 1100 -100 1100 300 1300C700 1500 -100 1500 300 1700C700 1900 -100
           1900 300 2100C700 2300 -100 2300 300 2500" />
+        <path *ngIf="userJourney[current].Group === 1" class="path" d="M 300 2500 L 300 2600" />
           <ng-container *ngFor="let item of svgJson; let i = index">
             <ng-container *ngIf="item.enableClick">
-              <g (click)="openTaskView()" id="currentGroup">
+              <g (click)="openTaskView()" id="currentGroup" transform="scale(1) translate(0, 0)">
                 <circle id="current" [attr.cx]="item.x" [attr.cy]="item.y + (100 * i)" [attr.r]="item.size" [attr.class]="'circle ' + item.color"></circle>
                 <text *ngIf="item.size === size.lg" dy="-2.5em" [attr.x]="item.x" [attr.y]="item.y + (100 * i)" fill="white" dominant-baseline="middle" text-anchor="middle" class="small">{{item.topText}}</text>
                 <text [attr.x]="item.x" [attr.y]="item.y + (100 * i)" dominant-baseline="middle" text-anchor="middle" fill="white" class="count" [ngClass]="{'lg': item.size === size.lg, 'md': item.size === size.md}">{{item.text}}</text>
@@ -31,6 +35,21 @@
               </g>
             </ng-container>
           </ng-container>
+          <g *ngIf="userJourney[current].Group === 1">
+            <image xlink:href="assets/images/rectangle.svg" x="288" y="2580" height="26" width="26"></image>
+            <rect x="167" y="2600" rx="20" ry="20" width="266" height="100"
+            style="fill:#fff;stroke:black;stroke-width:0;opacity:1" />
+            <image xlink:href="assets/images/green-circle-line.svg" x="180" y="2615" height="26" width="26"></image>
+            <text x="215" y="2627" fill="black" class="rect-text">
+              <tspan x="215" dy="0em">The Green Circle is your </tspan>
+              <tspan x="215" dy="1em">current set of tasks.</tspan>
+            </text>
+            <image xlink:href="assets/images/combined-shape.svg" x="178" y="2655" height="26" width="30"></image>
+            <text x="215" y="2665" fill="black" class="rect-text">
+              <tspan x="215" dy="0em">Play often to keep up your</tspan>
+              <tspan x="215" dy="1em">health and gain more xp.</tspan>
+            </text>
+          </g>
       </svg>
       </div>
     </div>
