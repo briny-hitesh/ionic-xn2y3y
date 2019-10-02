@@ -77,3 +77,66 @@ g {
   font-family: LuckiestGuy;
   text-transform: uppercase;
 }
+
+$score-width: 40px;
+$score-progress-height: 15px;
+.score-heads {
+  display: flex;
+  justify-content: space-between;
+}
+.score-box {
+  position: relative;
+  padding: 1px;
+  min-width: 100px;
+  &.right {
+    .image {
+      right: 0;
+      left: auto;
+    }
+    .progress-bar {
+      padding-left: 0;
+      padding-right: 36px;
+      .progress {
+        float: right;
+        border-radius: $score-progress-height 0 0 $score-progress-height;
+      }
+    }
+  }
+  .image {
+    width: $score-width;
+    height: $score-width;
+    border-radius: $score-width;
+    background: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      vertical-align: top;
+      width: 26px;
+    }
+  }
+  .progress-bar {
+    margin: 12px 0;
+    height: $score-progress-height;
+    border-radius: $score-progress-height;
+    max-width: 100px;
+    background: #efefef;
+    border: 1px solid #fff;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    padding-left: 36px;
+    .progress {
+      background: #ff4349;
+      height: 100%;
+      border-radius: 0 $score-progress-height $score-progress-height 0;
+      &.blue {
+        background: #ff4349;
+      }
+    }
+  }
+}

@@ -1,6 +1,24 @@
 <ion-content #content (ionScroll)="setupScroll($event)" scrollEvents="true">
   <div [ngStyle]="{'background-color': themeBackground[level]}">
     <div class="background" id="background">
+      <div class="score-heads">
+        <div class="score-box">
+          <div class="image">
+            <img src="assets/images/combined-shape.svg" alt="">
+          </div>
+          <div class="progress-bar">
+            <div class="progress" style="width: 50%;"></div>
+          </div>
+        </div>
+        <div class="score-box right">
+          <div class="image">
+            <img src="assets/images/combined-shape.svg" alt="">
+          </div>
+          <div class="progress-bar">
+            <div class="progress blue" style="width: 50%;"></div>
+          </div>
+        </div>
+      </div>
       <app-score-heads-up [templateData]= scoreHeadsUpInfo *ngIf="scoreHeadsUpInfo"></app-score-heads-up>
       <div class="ion-canvas">
       <svg [attr.viewBox]="'0 0 600 ' + svgHeight">
