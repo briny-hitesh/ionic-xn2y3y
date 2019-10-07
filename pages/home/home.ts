@@ -195,6 +195,12 @@ export class TaskBoardPage implements OnInit, AfterViewInit {
   openTaskView() {
     this.router.navigate(['home/view']);
   }
+  
+  appendStyle() {
+    const style = document.createElement('style');
+    style.innerHTML = String(`body {background-color: ${this.themeBackground[this.level]};}`);
+    this.styleRef.nativeElement.appendChild(style);
+  }
   setupScroll($event) {
     if (document.getElementById('background')) {
       document.getElementById('background').style.backgroundPositionY = ($event.detail.scrollTop / 2) + 'px';
