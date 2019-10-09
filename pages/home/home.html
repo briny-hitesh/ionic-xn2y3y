@@ -37,6 +37,7 @@
         <path fill="none" fill-rule="evenodd" stroke="#FFF" transform="translate(208 1660)" stroke-opacity=".301" stroke-width="4" d="M92.883 0c50.309 45.115 90.387 83.954 92.05 125.456C188.961 221.766 9.548 288.842 0 383.462 0 420.975 9.548 444.503 92.883 520"/>
         <path fill="none" fill-rule="evenodd" stroke="#FFF" transform="translate(208 2180)" stroke-opacity=".301" stroke-width="4" d="M92.883 0c50.309 45.115 90.387 83.954 92.05 125.456C188.961 221.766 9.548 288.842 0 383.462 0 420.975 9.548 444.503 92.883 520"/>
         <path fill="none" fill-rule="evenodd" stroke="#FFF" transform="translate(208 2700)" stroke-opacity=".301" stroke-width="4" d="M92.883 0c50.309 45.115 90.387 83.954 92.05 125.456C188.961 221.766 9.548 288.842 0 383.462 0 420.975 9.548 444.503 92.883 520"/>
+        <path *ngIf="level > 1"  fill="none" fill-rule="evenodd" stroke="#FFF" transform="translate(208 3220)" stroke-opacity=".301" stroke-width="4" d="M92.883 0c50.309 45.115 90.387 83.954 92.05 125.456C188.961 221.766 9.548 288.842 0 383.462 0 420.975 9.548 444.503 92.883 520"/>
         <path *ngIf="userJourney[current].Group === 1" class="path" d="M 300 3220 L 300 3320" />
           <ng-container *ngFor="let item of svgJson; let i = index">
             <ng-container *ngIf="item.enableClick">
