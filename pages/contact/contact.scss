@@ -1,0 +1,69 @@
+ion-content {
+  --background: #000;
+}
+.appWrapper {
+  max-width: 754px;
+  margin: 0 auto;
+  background: #fff;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.terms-content {
+  width: 100%;
+  height: 90%;
+  margin: 70px auto 0;
+  padding: 0 30px;
+}
+.term-con {
+  max-height: calc(100% - 180px);
+  overflow: auto;
+  margin: 30px 0
+}
+h3 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: normal;
+    margin-top: 0px;
+}
+p {
+    font-size: 12px;
+    color: #000;
+}
+ion-button {
+  margin: 10px auto;
+  display: block;
+  width: 200px;
+  height: 35px;
+  --background: #0768ae;
+  --padding-start: 30px;
+  --padding-end: 30px;
+  --border-radius: 6px;
+  text-transform: none;
+  --border-shadow: none;
+  --box-shadow: none;
+  --background-hover: #015192;
+}
+@mixin ipadComman() {
+  .appWrapper {
+    max-width: 100%;
+    align-items: center;
+  }
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+  @include ipadComman();
+}
+@media only screen and (max-device-width : 768px) and (min-device-width : 1024px) {
+  @include ipadComman();
+}
+@media only screen and (max-width : 767px) {
+  .terms-content {
+    margin: 30px 0;
+    height: calc(100% - 60px);
+  }
+  .term-con {
+    max-height: calc(100% - 140px);
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+}
